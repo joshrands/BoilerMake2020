@@ -24,7 +24,7 @@ except:
     print("[!] Connection error!")
     sys.exit(2)
 
-def run(win, timeout=3):
+def run(win, timeout=5):
     curses.echo()
     win.timeout(0) # Non-block read.
 
@@ -48,6 +48,7 @@ def run(win, timeout=3):
             else:
                 s.append(chr(c))
                 cmd += chr(c)
+                run = False
 
             if time_taken >= timeout:
                 # Out of time.
