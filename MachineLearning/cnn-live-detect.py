@@ -59,7 +59,7 @@ while cap.isOpened():
 #        print(predicted)
         count += 1
         if (predicted == 1):
-            print("Hawt garbage")
+            print("Hawt gawbage")
         else:
             print("Clean")
 

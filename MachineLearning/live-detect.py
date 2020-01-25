@@ -1,5 +1,6 @@
 from platform import python_version
 print(python_version())
+from defines import *
 
 import tensorflow as tf
 from tensorflow import keras
@@ -20,8 +21,8 @@ def getFlattenArray(img):
 
     return out_arr
 
-model = keras.models.load_model("model-v1.h5")
-cap = cv2.VideoCapture(3)
+model = keras.models.load_model("model-garbage-0.h5")
+cap = cv2.VideoCapture(1)
 
 # grab picture from webcam every second and run through model
 while cap.isOpened():
@@ -35,7 +36,7 @@ while cap.isOpened():
 #        scale_percent = 3
 #        width = int(frame.shape[1] * scale_percent / 100)
 #        height = int(frame.shape[0] * scale_percent / 100)
-        dim = (57, 32)
+        dim = (img_height, img_width)
 
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
@@ -53,10 +54,10 @@ while cap.isOpened():
         predicted = model.predict([flat_img]).argmax()
         print(predicted)
         if (predicted == 1):
-            print("Heart attack!")
+            print("Hawt garbage")
         else:
-            print("You good")
+            print("Clean")
 
-        time.sleep(2)
+        time.sleep(1)
 
 #    cv2.destroyAllWindows()
