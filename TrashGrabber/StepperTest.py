@@ -30,6 +30,8 @@ def counter_clockwise90():
         GPIO.output(control_pins[pin], halfstep_seq[halfstep][pin])
       time.sleep(0.001)
 
-#clockwise90()
-#counter_clockwise90()
-#GPIO.cleanup()
+clockwise90()
+counter_clockwise90()
+GPIO.cleanup()
+
+
