@@ -1,6 +1,9 @@
 from platform import python_version
 print(python_version())
+<<<<<<< HEAD
 from defines import *
+=======
+>>>>>>> e67f2d0fca2b87a9fabc62448271c2a50e5d453a
 
 import tensorflow as tf
 from tensorflow import keras
@@ -21,8 +24,13 @@ def getFlattenArray(img):
 
     return out_arr
 
+<<<<<<< HEAD
 model = keras.models.load_model("model-garbage-0.h5")
 cap = cv2.VideoCapture(1)
+=======
+model = keras.models.load_model("model-v1.h5")
+cap = cv2.VideoCapture(3)
+>>>>>>> e67f2d0fca2b87a9fabc62448271c2a50e5d453a
 
 # grab picture from webcam every second and run through model
 while cap.isOpened():
@@ -36,7 +44,11 @@ while cap.isOpened():
 #        scale_percent = 3
 #        width = int(frame.shape[1] * scale_percent / 100)
 #        height = int(frame.shape[0] * scale_percent / 100)
+<<<<<<< HEAD
         dim = (img_height, img_width)
+=======
+        dim = (57, 32)
+>>>>>>> e67f2d0fca2b87a9fabc62448271c2a50e5d453a
 
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
@@ -54,10 +66,18 @@ while cap.isOpened():
         predicted = model.predict([flat_img]).argmax()
         print(predicted)
         if (predicted == 1):
+<<<<<<< HEAD
             print("Hawt garbage")
         else:
             print("Clean")
 
         time.sleep(1)
+=======
+            print("Heart attack!")
+        else:
+            print("You good")
+
+        time.sleep(2)
+>>>>>>> e67f2d0fca2b87a9fabc62448271c2a50e5d453a
 
 #    cv2.destroyAllWindows()
