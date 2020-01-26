@@ -79,10 +79,28 @@ def getFramesFromVideo(file_name, garbage):
 
     print("Read " + str(count) + " frames")
 
-getFramesFromVideo("./garbage/garbage_1.mp4", 1)
-getFramesFromVideo("./garbage/garbage_2.mp4", 1)
+getFramesFromVideo("./garbage/dirty1.mp4", 1)
+getFramesFromVideo("./garbage/dirty2.mp4", 1)
+getFramesFromVideo("./garbage/dirty3.mp4", 1)
+getFramesFromVideo("./garbage/dirty4.mp4", 1)
+getFramesFromVideo("./garbage/dirty5.mp4", 1)
+getFramesFromVideo("./garbage/dirty6.mp4", 1)
+getFramesFromVideo("./garbage/dirty7.mp4", 1)
+getFramesFromVideo("./garbage/dirty8.mp4", 1)
+getFramesFromVideo("./garbage/dirty9.mp4", 1)
+getFramesFromVideo("./garbage/dirty10.mp4", 1)
+getFramesFromVideo("./garbage/dirty11.mp4", 1)
+getFramesFromVideo("./garbage/dirty12.mp4", 1)
+getFramesFromVideo("./garbage/dirty13.mp4", 1)
+getFramesFromVideo("./garbage/dirty14.mp4", 1)
+getFramesFromVideo("./garbage/dirty15.mp4", 1)
 
-getFramesFromVideo("./clean/clean_1.mp4", 0)
+getFramesFromVideo("./clean/clean1.mp4", 0)
+#getFramesFromVideo("./clean/clean2.mp4", 0)
+getFramesFromVideo("./clean/clean3.mp4", 0)
+getFramesFromVideo("./clean/clean4.mp4", 0)
+getFramesFromVideo("./clean/clean5.mp4", 0)
+getFramesFromVideo("./clean/clean6.mp4", 0)
 
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3),
@@ -99,7 +117,7 @@ model.add(Flatten())
 # A hidden layer to learn with
 model.add(Dense(128, activation='relu'))
 # Another dropout
-model.add(Dropout(0.5))
+model.add(Dropout(0.4))
 # A hidden layer to learn with
 model.add(Dense(128, activation='relu'))
 # Another dropout
@@ -131,6 +149,8 @@ print("Split at " + str(split))
 test_data = train_data[split:]
 train_data = train_data[:split]
 
+print("Data successfully split")
+
 # split train_data into train_x and train_y
 x_train = []
 y_train = []
@@ -138,17 +158,20 @@ for pair in train_data:
     x_train.append(pair[0])
     y_train.append(pair[1])
 
+print("Training data set complete.")
+
 x_test = []
 y_test = []
 for pair in test_data:
     x_test.append(pair[0])
     y_test.append(pair[1])
 
+print("Testing data set complete.")
 #print(x_train[0])
 
 history = model.fit(x_train, y_train,
                     batch_size=32,
-                    epochs=3,
+                    epochs=5,
                     verbose=2,
                     validation_data=(x_test, y_test))
 
