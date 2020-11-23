@@ -4,6 +4,7 @@ import time
 from subprocess import Popen,PIPE,STDOUT,call
 
 from car import *
+from Stepper import *
 
 HOST = ''                              
 PORT = int(sys.argv[1])
@@ -43,17 +44,23 @@ def handler(connection, myCar):
             sys.exit(0)
         elif cmd.decode() == 'w':
             print("Driving forward")
-            myCar.forward(50)
+            myCar.stepBackward()
         elif cmd.decode() == 's':
             print("Stop")
-            myCar.stop()
+            myCar.stepForward()
         elif cmd.decode() == 'a':
             print("Turn left")
-            myCar.left_turn()
+            myCar.stepLeft()
         elif cmd.decode() == 'd':
             print("Turn right")
-            myCar.right_turn()
+            myCar.stepRight()
 #            time.sleep(1)
+        elif cmd.decode() == 'o':
+            print("Opening claw")
+            open_claw()
+        elif cmd.decode() == 'c':
+            print("Closing claw")
+            close_claw()
 
         else:
            myCar.stop()

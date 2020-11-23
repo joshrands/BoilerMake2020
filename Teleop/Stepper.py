@@ -21,18 +21,24 @@ def clockwise90():
     for halfstep in range(8):
       for pin in range(4):
         GPIO.output(control_pins[pin], halfstep_seq[7 - halfstep][pin])
-      time.sleep(0.0005)
+      time.sleep(0.001)
 
 def counter_clockwise90():
   for i in range(128):
     for halfstep in range(8):
       for pin in range(4):
         GPIO.output(control_pins[pin], halfstep_seq[halfstep][pin])
-      time.sleep(0.0005)
+      time.sleep(0.001)
 
-clockwise90()
-time.sleep(1)
-counter_clockwise90()
-GPIO.cleanup()
+def open_claw():
+    clockwise90()
+
+def close_claw():
+    counter_clockwise90()
+
+#clockwise90()
+#time.sleep(1)
+#counter_clockwise90()
+#GPIO.cleanup()
 
 

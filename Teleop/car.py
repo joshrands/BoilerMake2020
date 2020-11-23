@@ -52,6 +52,81 @@ class carClass:
         self.BRF_PWM.start(0)
         self.BRB_PWM.start(0)
 
+        self.right_pwm = 0
+        self.left_pwm = 0
+        self.step_size = 10
+
+    def driveMotors(self):
+        if (self.right_pwm > 100):
+            self.right_pwm = 100
+        elif (self.right_pwm < -100):
+            self.right_pwm = -100
+
+        if (self.left_pwm > 100):
+            self.left_pwm = 100
+        elif (self.left_pwm < -100):
+            self.left_pwm = -100
+        
+        if (self.right_pwm >= 0):
+            self.FRF_PWM.ChangeDutyCycle(self.right_pwm)
+            self.BRF_PWM.ChangeDutyCycle(self.right_pwm)
+            self.FRB_PWM.ChangeDutyCycle(0)
+            self.BRB_PWM.ChangeDutyCycle(0)
+        else: 
+            self.FRF_PWM.ChangeDutyCycle(0)
+            self.BRF_PWM.ChangeDutyCycle(0)
+            self.FRB_PWM.ChangeDutyCycle(-1*self.right_pwm)
+            self.BRB_PWM.ChangeDutyCycle(-1*self.right_pwm)
+
+        if (self.left_pwm >= 0):
+            self.FLF_PWM.ChangeDutyCycle(self.left_pwm)
+            self.BLF_PWM.ChangeDutyCycle(self.left_pwm)
+            self.FLB_PWM.ChangeDutyCycle(0)
+            self.BLB_PWM.ChangeDutyCycle(0)
+        else:
+            self.FLF_PWM.ChangeDutyCycle(0)
+            self.BLF_PWM.ChangeDutyCycle(0)
+            self.FLB_PWM.ChangeDutyCycle(-1*self.left_pwm)
+            self.BLB_PWM.ChangeDutyCycle(-1*self.left_pwm)
+
+    def stepForward(self):
+        if (self.right_pwm == 0):
+            self.right_pwm = 30
+            self.left_pwm = 30
+        else:
+            self.right_pwm += self.step_size
+            self.left_pwm += self.step_size
+
+        self.driveMotors()
+
+    def stepBackward(self):
+        if (self.right_pwm == 0):
+            self.right_pwm = -30 
+            self.left_pwm = -30 
+        else: 
+            self.right_pwm -= self.step_size
+            self.left_pwm -= self.step_size
+
+        self.driveMotors()
+
+    def stepRight(self):
+        self.right_pwm = -60 
+        self.left_pwm = 60 
+        self.driveMotors()
+        time.sleep(0.2)
+        self.right_pwm = 0 
+        self.left_pwm = 0 
+        self.driveMotors()
+
+    def stepLeft(self):
+        self.left_pwm = -60 
+        self.right_pwm = 60 
+        self.driveMotors()
+        time.sleep(0.2)
+        self.left_pwm = 0 
+        self.right_pwm = 0 
+        self.driveMotors()
+
     # Stops all PWM permanently
     def end(self):
         self.FLF_PWM.stop()
